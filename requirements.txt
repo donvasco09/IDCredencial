@@ -4,6 +4,6 @@ python-multipart==0.0.6
 twilio==8.10.0
 mistralai==1.0.0          # Versión actualizada (compatible con pydantic>=2.5.2)
 python-dotenv==1.0.0
-httpx==0.25.0
+httpx>=0.27.0,<0.28.0
 pydantic==2.5.3           # Versión actualizada (>=2.5.2 para mistralai)
 pydantic-settings==2.1.0
