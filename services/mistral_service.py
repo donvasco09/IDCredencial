@@ -1,9 +1,7 @@
 from mistralai import Mistral
 from config import settings
 import logging
-import json
 import time
-from typing import Optional
 from models.schemas import OCRResult
 
 logger = logging.getLogger(__name__)
@@ -18,15 +16,17 @@ class MistralOCRService:
         start_time = time.time()
         
         try:
-            # Crear data URL
+            # Crear data URL según el tipo de imagen
             if 'png' in mime_type.lower():
                 data_url = f"data:image/png;base64,{image_base64}"
+            elif 'gif' in mime_type.lower():
+                data_url = f"data:image/gif;base64,{image_base64}"
             else:
                 data_url = f"data:image/jpeg;base64,{image_base64}"
             
             logger.info(f"Enviando imagen a Mistral OCR, tamaño: {len(image_base64)} caracteres")
             
-            # Llamar a Mistral OCR API (versión async)
+            # Llamar a Mistral OCR API
             ocr_response = await self.client.ocr.process_async(
                 model=self.model,
                 document={
@@ -42,7 +42,11 @@ class MistralOCRService:
                 page_data = {
                     "index": page.index,
                     "markdown": page.markdown,
-                    "dimensions": page.dimensions if hasattr(page, 'dimensions') else None
+                    "dimensions": {
+                        "width": page.dimensions.width,
+                        "height": page.dimensions.height,
+                        "dpi": page.dimensions.dpi
+                    } if hasattr(page, 'dimensions') else None
                 }
                 pages.append(page_data)
             
@@ -63,9 +67,8 @@ class MistralOCRService:
             )
     
     async def test_connection(self) -> bool:
-        """Prueba la conexión con Mistral"""
+        """Prueba la conexión con Mistral usando una imagen tiny"""
         try:
-            # Usar una imagen tiny en base64 para probar
             tiny_gif = "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             data_url = f"data:image/gif;base64,{tiny_gif}"
             
