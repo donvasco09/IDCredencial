@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from datetime import datetime
-from ..models.schemas import HealthResponse
-from ..services.mistral_service import mistral_service
+from models.schemas import HealthResponse
+from services.mistral_service import mistral_service
 
 router = APIRouter()
 
