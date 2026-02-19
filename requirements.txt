@@ -2,8 +2,8 @@ fastapi==0.115.0
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 twilio==8.10.0
-mistralai==0.4.2
+mistralai==1.0.0          # Versión actualizada (compatible con pydantic>=2.5.2)
 python-dotenv==1.0.0
 httpx==0.25.0
-pydantic==2.4.0
+pydantic==2.5.3           # Versión actualizada (>=2.5.2 para mistralai)
 pydantic-settings==2.1.0
