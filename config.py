@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     mistral_api_key: str
     
     # Flask
-    secret_key: str
+    secret_key: Optional[str] = None
     
     # Optional: Security
     validate_twilio_signature: bool = False
@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     model_config = ConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        case_sensitive=False
+        case_sensitive=False,
+        extra="ignore"
     )
 
 settings = Settings()
