@@ -1,10 +1,10 @@
 from mistralai import Mistral
-from ..config import settings
+from config import settings
 import logging
 import json
 import time
 from typing import Optional
-from ..models.schemas import OCRResult
+from models.schemas import OCRResult
 
 logger = logging.getLogger(__name__)
 
