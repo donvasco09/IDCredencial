@@ -11,7 +11,7 @@ async def download_image_from_url(url: str) -> Tuple[Optional[str], Optional[str
     try:
         auth = (settings.twilio_account_sid, settings.twilio_auth_token)
         
-        async with httpx.AsyncClient(timeout=15.0, auth=auth) as client:
+        async with httpx.AsyncClient(timeout=15.0, auth=auth, follow_redirects=True) as client:
             logger.info(f"Descargando imagen desde {url}")
             response = await client.get(url)
             response.raise_for_status()
