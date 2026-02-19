@@ -2,10 +2,10 @@ from fastapi import APIRouter, Form, HTTPException, Request, Response
 from twilio.twiml.messaging_response import MessagingResponse
 from twilio.request_validator import RequestValidator
 import logging
-from ..services.image_service import download_image_from_url, create_data_url
-from ..services.mistral_service import mistral_service
-from ..config import settings
-from ..models.schemas import TwilioWebhookForm
+from services.image_service import download_image_from_url, create_data_url
+from services.mistral_service import mistral_service
+from config import settings
+from models.schemas import TwilioWebhookForm
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
